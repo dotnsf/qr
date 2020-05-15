@@ -56,11 +56,11 @@ function checkPicture(){
     const code = jsQR(imageData.data, canvas.width, canvas.height);
     //const code = jsQR(img, canvas.width, canvas.height);
 
+    console.log( code );
     //----------------------
     // 存在する場合
     //----------------------
     if( code ){
-      console.log( code );
       // 結果を表示
       setQRResult("#result", code.data);  // 文字列
       drawLine(ctx, code.location);       // 見つかった箇所に線を引く
@@ -76,10 +76,12 @@ function checkPicture(){
     // 存在しない場合
     //----------------------
     else{
-      // 0.3秒後にもう一度チェックする
+      // 3秒後にもう一度チェックする
+      /*
       setTimeout( () => {
         checkPicture();
-      }, 300);
+      }, 3000);
+      */
     }
   };
 }
