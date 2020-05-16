@@ -19,7 +19,7 @@
 <h1>QRCode Reader</h1>
 
 <section id="contents">
-  <img id="image" src="./qrcode_sample_colormanhole.png" width="200"/><br/>
+  <img id="image" src="./dote_sample_colormanhole.png" width="200"/><br/>
 
   <!-- 処理用 -->
   <canvas id="picture" width="200" height="200"></canvas>
@@ -62,8 +62,8 @@ function checkPicture(){
     //----------------------
     if( code ){
       // 結果を表示
-      setQRResult("#result", code.data);  // 文字列
-      drawLine(ctx, code.location);       // 見つかった箇所に線を引く
+      setQRResult("#result", code.data);  // 文字列( == '')
+      //drawLine(ctx, code.location);       // 見つかった箇所に線を引く
 
       // video と canvas を入れ替え
       /*
@@ -71,6 +71,8 @@ function checkPicture(){
       video.style.display = 'none';
       video.pause();
       */
+
+      // code.binaryData ( Array(620) のバイナリ配列)を解析する必要がある？
     }
     //----------------------
     // 存在しない場合
