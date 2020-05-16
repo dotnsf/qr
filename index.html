@@ -46,7 +46,8 @@ window.onload = () => {
  */
 function checkPicture(){
   var img = new Image;
-  img.src = './qrcode_sample_colormanhole.png';
+  //img.src = './qrcode_sample_colormanhole.png';
+  img.src = './myqrcode.png';
   img.onload = () => {
     // カメラの映像をCanvasに複写
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
