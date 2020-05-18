@@ -45,6 +45,9 @@ window.onload = () => {
  * QRコードの読み取り
  */
 function checkPictures(){
+  var bin1 = null;
+  var bin2 = null;
+
   var img1 = new Image;
   img1.src = './qrcode_sample_colormanhole.png';
   img1.onload = () => {
@@ -55,11 +58,15 @@ function checkPictures(){
     const imageData1 = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
     const code1 = jsQR(imageData1.data, canvas1.width, canvas1.height);
 
-    console.log( 'code1', code1 );
+    //console.log( 'code1', code1 );
+    bin1 = code1.binaryData;
+    if( bin2 != null ){
+      compareData( bin1, bin2 );
+    }
   };
 
   var img2 = new Image;
-  img2.src = './qrcode_sample_colormanhole.png';
+  img2.src = './qrcode_sample_123_error.png';
   img2.onload = () => {
     // カメラの映像をCanvasに複写
     ctx2.drawImage(img2, 0, 0, canvas2.width, canvas2.height);
@@ -68,8 +75,30 @@ function checkPictures(){
     const imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
     const code2 = jsQR(imageData2.data, canvas2.width, canvas2.height);
 
-    console.log( 'code2', code2 );
+    //console.log( 'code2', code2 );
+    bin2 = code2.binaryData;
+    if( bin1 != null ){
+      compareData( bin1, bin2 );
+    }
   };
+}
+
+function compareData( bin1, bin2 ){
+  console.log( '*1', bin1[42], bin2[42] );
+  console.log( '*2', bin1[43], bin2[43] );
+  console.log( '*3', bin1[64], bin2[64] );
+  console.log( '*4', bin1[65], bin2[65] );
+  console.log( '*5', bin1[86], bin2[86] );
+  console.log( '*6', bin1[87], bin2[87] );
+  console.log( '*7', bin1[103], bin2[103] );
+  console.log( '*8', bin1[104], bin2[104] );
+  console.log( '*9', bin1[105], bin2[105] );
+  console.log( '*10', bin1[106], bin2[106] );
+  console.log( '*11', bin1[107], bin2[107] );
+  console.log( '*12', bin1[62], bin2[62] );
+  console.log( '*13', bin1[63], bin2[63] );
+  console.log( '*14', bin1[84], bin2[84] );
+  console.log( '*15', bin1[85], bin2[85] );
 }
 
 
