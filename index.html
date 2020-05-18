@@ -6,7 +6,7 @@
   <style>
     /* 全体のレイアウト調整 */
     #contents { display:flex; width:650px;}
-    #camera, #picture, #result { justify-content:center; margin:5px;}
+    #camera, #picture1, #picture2, #result { justify-content:center; margin:5px;}
 
     /* リーダー部分 */
     /*#picture { display:none; }*/
@@ -19,10 +19,9 @@
 <h1>QRCode Reader</h1>
 
 <section id="contents">
-  <img id="image" src="./dote_sample_colormanhole.png" height="200"/><br/>
-
   <!-- 処理用 -->
-  <canvas id="picture" width="200" height="200"></canvas>
+  <canvas id="picture1" width="200" height="200"></canvas>
+  <canvas id="picture2" width="200" height="200"></canvas>
 
   <!-- 読み取り結果 -->
   <div id="result">
@@ -32,61 +31,44 @@
 
 <script src="./jsQR.min.js"></script>
 <script>
-const image = $("#image");
-const canvas = $("#picture");    // === document.querySelector("#picture");
-const ctx = canvas.getContext("2d");
+const canvas1 = $("#picture1");    // === document.querySelector("#picture");
+const ctx1 = canvas1.getContext("2d");
+const canvas2 = $("#picture2");    // === document.querySelector("#picture");
+const ctx2 = canvas2.getContext("2d");
 
 window.onload = () => {
   // QRコードのチェック開始
-  checkPicture();
+  checkPictures();
 };
 
 /**
  * QRコードの読み取り
  */
-function checkPicture(){
-  var img = new Image;
-  img.src = './qrcode_sample_colormanhole.png';
-  //img.src = './myqrcode.png';
-  //img.src = './a.png';
-  img.onload = () => {
+function checkPictures(){
+  var img1 = new Image;
+  img1.src = './qrcode_sample_colormanhole.png';
+  img1.onload = () => {
     // カメラの映像をCanvasに複写
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    ctx1.drawImage(img1, 0, 0, canvas1.width, canvas1.height);
 
     // QRコードの読み取り
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const code = jsQR(imageData.data, canvas.width, canvas.height);
-    //const code = jsQR(img, canvas.width, canvas.height);
+    const imageData1 = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
+    const code1 = jsQR(imageData1.data, canvas1.width, canvas1.height);
 
-    console.log( code );
-    //----------------------
-    // 存在する場合
-    //----------------------
-    if( code ){
-      // 結果を表示
-      setQRResult("#result", code.data);  // 文字列( == '')
-      //drawLine(ctx, code.location);       // 見つかった箇所に線を引く
+    console.log( 'code1', code1 );
+  };
 
-      // video と canvas を入れ替え
-      /*
-      canvas.style.display = 'block';
-      video.style.display = 'none';
-      video.pause();
-      */
+  var img2 = new Image;
+  img2.src = './qrcode_sample_colormanhole.png';
+  img2.onload = () => {
+    // カメラの映像をCanvasに複写
+    ctx2.drawImage(img2, 0, 0, canvas2.width, canvas2.height);
 
-      // code.binaryData ( Array(620) のバイナリ配列)を解析する必要がある？
-    }
-    //----------------------
-    // 存在しない場合
-    //----------------------
-    else{
-      // 3秒後にもう一度チェックする
-      /*
-      setTimeout( () => {
-        checkPicture();
-      }, 3000);
-      */
-    }
+    // QRコードの読み取り
+    const imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    const code2 = jsQR(imageData2.data, canvas2.width, canvas2.height);
+
+    console.log( 'code2', code2 );
   };
 }
 
