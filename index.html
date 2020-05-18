@@ -60,6 +60,7 @@ function checkPictures(){
 
     console.log( 'code1', code1 );
     bin1 = code1.binaryData;
+    showData( bin1 );
 
     var img2 = new Image;
     img2.src = './qrcode_sample_123_error.png';
@@ -72,8 +73,8 @@ function checkPictures(){
       const code2 = jsQR(imageData2.data, canvas2.width, canvas2.height);
 
       console.log( 'code2', code2 );
-      bin2 = code2.binaryData;
-      compareData( bin1, bin2 );
+      //bin2 = code2.binaryData;
+      //compareData( bin1, bin2 );
     };
   };
 }
@@ -94,6 +95,24 @@ function compareData( bin1, bin2 ){
   console.log( '*13', bin1[63], bin2[63] );
   console.log( '*14', bin1[84], bin2[84] );
   console.log( '*15', bin1[85], bin2[85] );
+}
+
+function showData( bin ){
+  console.log( '*1', bin[42] );
+  console.log( '*2', bin[43] );
+  console.log( '*3', bin[64] );
+  console.log( '*4', bin[65] );
+  console.log( '*5', bin[86] );
+  console.log( '*6', bin[87] );
+  console.log( '*7', bin[103] );
+  console.log( '*8', bin[104] );
+  console.log( '*9', bin[105] );
+  console.log( '*10', bin[106] );
+  console.log( '*11', bin[107] );
+  console.log( '*12', bin[62] );
+  console.log( '*13', bin[63] );
+  console.log( '*14', bin[84] );
+  console.log( '*15', bin[85] );
 }
 
 
