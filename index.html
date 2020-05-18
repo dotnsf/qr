@@ -58,7 +58,7 @@ function checkPictures(){
     const imageData1 = ctx1.getImageData(0, 0, canvas1.width, canvas1.height);
     const code1 = jsQR(imageData1.data, canvas1.width, canvas1.height);
 
-    //console.log( 'code1', code1 );
+    console.log( 'code1', code1 );
     bin1 = code1.binaryData;
     if( bin2 != null ){
       compareData( bin1, bin2 );
@@ -75,7 +75,7 @@ function checkPictures(){
     const imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
     const code2 = jsQR(imageData2.data, canvas2.width, canvas2.height);
 
-    //console.log( 'code2', code2 );
+    console.log( 'code2', code2 );
     bin2 = code2.binaryData;
     if( bin1 != null ){
       compareData( bin1, bin2 );
